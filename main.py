@@ -23,7 +23,8 @@ def menu():
 
 while True:
 	ruta = 'documento.txt'
-	balanceador = 'http://104.198.56.138'
+	balanceador = 'http://104.198.56.138/imp'
+	#balanceador = 'http://localhost:8080/imp'
 	lista = {}
 	menu()
 	opcionMenu = input("inserta un numero valor >> ")
@@ -50,8 +51,11 @@ while True:
 	elif opcionMenu=="4":
 		for clave in data['clients']:
 			response = requests.post(balanceador, data = clave)
-			print("Envio Dato")
-			print(response)
+			if response.text == 'OK': 
+				print("DATO ENVIADO")
+			else:
+				print("ERROR en ENVIO")
+					
 
 	elif opcionMenu=="5":
 		break
