@@ -28,8 +28,8 @@ Estado
 
 #define FileProc "cpu_grupo18"
 #define Carnet ""
-#define Nombre "G18"
-#define Curso "Sistemas operativos 2"
+#define Nombre "201504242"
+#define Curso "Sistemas operativos 1"
 #define SO "Ubuntu"
 
 struct task_struct *task;
@@ -42,28 +42,14 @@ static int proc_llenar_archivo(struct seq_file *m, void *v) {
 
     seq_printf(m, "[\n");
     extra2 = 0;
-
-
 	for_each_process(task){
-
 		if(extra2 == 0){
-
 			extra2 = 1;
-
 		}else{
-
 			seq_printf(m,",");	
 		}
-
-
-
-        seq_printf(m, "\n{ \"PID\" : %d, \"Nombre\" : \"%s\", \"Estado\" : %ld , \"uid\" : %i , \"mm\"  : 0,", task->pid, task->comm, task->state, task->cred->uid.val);
-
-		seq_printf(m,"\"sub\": [");
-
-		
+        seq_printf(m, "\n{ \"uso\" : %d }", task->usage);
 		extra = 0;
-
 		list_for_each(list, &task->children){
 
 			if(extra == 0){
@@ -73,23 +59,13 @@ static int proc_llenar_archivo(struct seq_file *m, void *v) {
 
 				seq_printf(m,",");	
 			}
-
-
-
 			task_child = list_entry(list, struct task_struct, sibling);
-
-	    	seq_printf(m, "\n     { \"PID\" : %d, \"Nombre\" : \"%s\" , \"Estado\" : %ld , \"uid\" : %i,  \"mm\"  : 0 }", task_child->pid, task_child->comm, task_child->state,task_child->cred->uid.val);
+	    	seq_printf(m, "\n{ \"uso\" : %d }", task_child->usage);
+		}			
+		extra = 0;		
 		}
-			
-		extra = 0;
-
-		seq_printf(m,"]\n}\n");
-		
-		}
-
-
-    seq_printf(m, "\n]\n");
-        return 0;
+	seq_printf(m, "\n]\n");
+	return 0;
 }
 
 
