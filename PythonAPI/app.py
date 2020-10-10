@@ -1,7 +1,14 @@
 # app.py - a minimal flask api using flask_restful
 from flask import Flask
+from flask import request
 import os
 app = Flask(__name__)
+
+@app.route('/imp', method=['POST'])
+def imp():
+    nombre = request.form
+    return nombre
+
 
 @app.route('/')
 def hello_world():
