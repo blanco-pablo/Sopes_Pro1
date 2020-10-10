@@ -31,8 +31,7 @@ static int myread (struct seq_file *buff, void *v){
     printk( KERN_DEBUG "read handler\n");
     si_meminfo(&i);
     //seq_printf(buff,"{\"total\":%ld, \"libre\": %ld}", i.totalram, i.freeram);
-    por = ( i.freeram * 100 ) / i.totalram;
-    seq_printf(buff,"{\"total\":%ld}", por);
+    seq_printf(buff,"{\"total\":%ld}", (( i.freeram * 100 ) / i.totalram));
     return 0;
 }
 
