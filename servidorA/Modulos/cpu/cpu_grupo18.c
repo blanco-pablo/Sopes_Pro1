@@ -37,22 +37,28 @@ struct task_struct *task_child;
 struct list_head *list;
 int extra;
 int extra2;
-int suma; 
-
+long suma; 
+double seconds;
+double cpu;
 static int proc_llenar_archivo(struct seq_file *m, void *v) {
 
     seq_printf(m, "[\n");
 	
 	suma = 0;
     extra2 = 0;
+	seconds = 0;
+	cpu = 0;
 	for_each_process(task){
 		if(extra2 == 0){
 			extra2 = 1;
 		}else{
 			seq_printf(m,",");	
 		}
-		suma = suma + (task->utime + task->stime);
-        seq_printf(m, "\n{ \"uso\" : %llu }", suma);
+		suma = (task->utime + task->stime);
+		seconds = (task->start_time / 23000000);
+		cpu = 100 * ((suma / 23000000) / seconds);
+
+        seq_printf(m, "\n{ \"uso\" : %d }", cpu);
 		extra = 0;
 		list_for_each(list, &task->children){
 
@@ -63,13 +69,19 @@ static int proc_llenar_archivo(struct seq_file *m, void *v) {
 
 				seq_printf(m,",");	
 			}
+			
+			
+
 			task_child = list_entry(list, struct task_struct, sibling);
-			suma = suma + (task_child->utime + task_child->stime);
-	    	seq_printf(m, "\n{ \"uso\" : %llu }", suma);
+			suma = (task_child->utime + task_child->stime);
+			seconds = (task_child->start_time / 23000000);
+			cpu = 100 * ((suma / 23000000) / seconds);
+	    	seq_printf(m, "\n{ \"uso\" : %d }", cpu);
 		}			
 		extra = 0;		
 		}
 	seq_printf(m, "\n]\n");
+
 	return 0;
 }
 
