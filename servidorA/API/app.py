@@ -23,7 +23,7 @@ def ram():
         cad = ''
         for x in mycol.find():
             cad = str(cad) + str(x)
-        return a["total"] + str(cad)
+        return str(a["total"]) + str(cad)
     return ""
 
 
