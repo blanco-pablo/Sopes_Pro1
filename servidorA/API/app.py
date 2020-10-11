@@ -2,14 +2,16 @@
 from flask import Flask
 from flask import request
 import os
+import json
 
 app = Flask(__name__)
 
 @app.route('/ram', methods=['POST'])
 def ram():
     f = open("/proc/mem_grupo18", "r")
-    print(f.read())
-    return f.read()
+    data = json.load(f.read())
+    print(data)
+    return data
 
 
 @app.route('/')
