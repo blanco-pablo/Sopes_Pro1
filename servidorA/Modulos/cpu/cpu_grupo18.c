@@ -57,7 +57,7 @@ static int proc_llenar_archivo(struct seq_file *m, void *v) {
 	seq_printf(m, "TOTAL: %u\n",total);
 	seq_printf(m, "SEG: %u\n",segg);
 	//num = (total / h ); // segg );
-	seq_printf(m, "1: %f\n", (total / h ));
+	seq_printf(m, "1: %lf\n", (total / h ));
 	return 0;
 }
 
