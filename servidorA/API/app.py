@@ -8,6 +8,11 @@ app = Flask(__name__)
 
 @app.route('/ram', methods=['POST'])
 def ram():
+    with open('/proc/mem_grupo18') as f:
+        for line in f:
+            print(line.rstrip('\n'))
+            a = line
+        return a
     #with open('/proc/mem_grupo18') as f:
     #    data = json.load(f)
     #    print(data)
