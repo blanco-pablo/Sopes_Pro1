@@ -4,8 +4,11 @@ from flask import request
 import os
 import json
 import pymongo
+import urllib.parse
 
-myclient = pymongo.MongoClient('mongodb://34.122.6.193:27017/')
+username = urllib.parse.quote_plus('root')
+password = urllib.parse.quote_plus('rootpassword')
+myclient = pymongo.MongoClient('mongodb://%s:%s@34.122.6.193:27017/' % (username, password))
 mydb = myclient['mydatabase']
 mycol = mydb["ram"]
 
