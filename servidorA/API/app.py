@@ -10,7 +10,7 @@ app = Flask(__name__)
 def ram():
     with open('/proc/mem_grupo18') as f:
         for line in f:
-            a = json.loads(f)
+            a = json.loads(line)
         return a["total"]
     #with open('/proc/mem_grupo18') as f:
     #    data = json.load(f)
