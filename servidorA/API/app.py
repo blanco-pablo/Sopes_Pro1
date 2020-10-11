@@ -13,7 +13,7 @@ password = urllib.parse.quote_plus('rootpassword')
 myclient = pymongo.MongoClient('mongodb://%s:%s@34.122.6.193:27017/' % (username, password))
 mydb = myclient['mydatabase']
 mycol = mydb["ram"]
-mycpu = mydb["ram"]
+mycpu = mydb["cpu"]
 
 app = Flask(__name__)
 
