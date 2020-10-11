@@ -3,6 +3,11 @@ from flask import Flask
 from flask import request
 import os
 import json
+import pymongo
+
+myclient = pymongo.MongoClient('mongodb://34.122.6.193:27017/')
+mydb = myclient['mydatabase']
+mycol = mydb["ram"]
 
 app = Flask(__name__)
 
@@ -11,7 +16,11 @@ def ram():
     with open('/proc/mem_grupo18') as f:
         for line in f:
             a = json.loads(line)
-        return a["total"]
+        
+        cad = ''
+        for x in mycol.find():
+            cad = str(cad) + str(x)
+        return a["total"] + str(cad)
     return ""
 
 
