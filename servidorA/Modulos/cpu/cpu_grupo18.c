@@ -40,13 +40,13 @@ static int h = 100;
 int total;
 int I;
 int segg;
-float a;
+float num;
 static int proc_llenar_archivo(struct seq_file *m, void *v) {
 	
 	total = 0;
     I = 0;
 	segg = 0;
-
+	num = 0;
 	for_each_process(task){
 		uptime = ktime_divns(ktime_get_boottime(), NSEC_PER_SEC);
 		total = total + task->utime + task->stime;
@@ -56,8 +56,8 @@ static int proc_llenar_archivo(struct seq_file *m, void *v) {
 
 	seq_printf(m, "TOTAL: %u\n",total);
 	seq_printf(m, "SEG: %u\n",segg);
-	a = (total / h ); // segg );
-	seq_printf(m, "1: %f\n", a);
+	num = (total / h ); // segg );
+	seq_printf(m, "1: %f\n", (total / h ));
 	return 0;
 }
 
