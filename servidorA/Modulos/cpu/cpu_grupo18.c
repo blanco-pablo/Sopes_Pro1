@@ -52,7 +52,7 @@ static int proc_llenar_archivo(struct seq_file *m, void *v) {
 		uptime = ktime_divns(ktime_get_boottime(), NSEC_PER_SEC);
 		total = total + task->utime + task->stime;
 		I = task->start_time;
-		seg = seg + (uptime - (I / h) );
+		segg = segg + (uptime - (I / h) );
 	}
 
 	seq_printf(m, "%u\n",total);
