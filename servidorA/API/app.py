@@ -31,8 +31,7 @@ def consulta():
     return jsonify(
         cantidad = len(listaRAM),
         minRam = min(listaRAM),
-        minCpu = min(listaCPU),
-        status=200
+        minCpu = min(listaCPU)
     )
 
 @app.route('/ram', methods=['POST'])
