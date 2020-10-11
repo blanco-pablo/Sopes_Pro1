@@ -1,0 +1,11 @@
+services:
+    mongo:
+      container_name: mongo
+      image: mongo
+      command: mongo --smallfiles
+      restart: always
+      volumes:
+        - /data/mongodb:/data/db
+      ports:
+        - "27017:27017" 
+        
