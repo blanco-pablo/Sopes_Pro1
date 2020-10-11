@@ -28,11 +28,11 @@ def consulta():
         listaCPU.append(x['cpu'])
 
     #mando {'cantidad': 5, 'minRam': 4.5,'minCpu':1.2,status:200}
-    return {
+    return json.dumps({
         'cantidad' : len(listaRAM),
         'minRam' : min(listaRAM),
         'minCpu' : min(listaCPU)
-    }
+    })
 
 @app.route('/ram', methods=['POST'])
 def ram():
