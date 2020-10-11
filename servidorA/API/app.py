@@ -20,9 +20,9 @@ def ram():
         for line in f:
             a = json.loads(line)
         
-        cad = ''
+        listaRAM = []
         for x in mycol.find():
-            cad = str(cad) + str(x)
+            cad = x['ram']
         return str(a["total"]) + str(cad)
     return ""
 
