@@ -36,26 +36,28 @@ struct task_struct *task;
 struct task_struct *task_child;
 struct list_head *list;
 s64 uptime;
-
+static int h = 100;
+int total;
+int I;
+int segg;
 static int proc_llenar_archivo(struct seq_file *m, void *v) {
 
     seq_printf(m, "[\n");
 	
-	int total = 0;
-    int I= 0;
-	int seg = 0;
+	total = 0;
+    I = 0;
+	segg = 0;
 
 	for_each_process(task){
 		uptime = ktime_divns(ktime_get_boottime(), NSEC_PER_SEC);
 		total = total + task->utime + task->stime;
 		I = task->start_time;
-		seg = seg + (uptime -(I / 100));
-
+		seg = seg + (uptime - (I / h) );
 	}
 
 	seq_printf(m, "%u\n",total);
-	seq_printf(m, "%u\n",seg);
-	seq_printf(m, "%u\n",(100 * ((total / 100 ) / seg ));
+	seq_printf(m, "%u\n",segg);
+	seq_printf(m, "%u\n", (100 * ( (total / h ) / segg )));
 	return 0;
 }
 
