@@ -4,7 +4,7 @@ from flask import request
 import os
 import requests
 servidorA = 'http://34.122.6.193/'
-servidorB = 'http://34.122.6.193/consulta'
+servidorB = 'http://34.122.6.193/'
 app = Flask(__name__)
 
 @app.route('/imp', methods=['POST'])
@@ -13,7 +13,16 @@ def imp():
     # Consultar A y B
     # espero {'cantidad': 5, 'minRam': 4.5,'minCpu':1.2, status:200}
     response = requests.post(servidorA+"consulta")
-    
+    #responseB = requests.post(servidorB+"consulta")
+    if (response.status_code == 200 ):# & responseB.status_code == 200):
+        response_Json = response.json()
+        if response_Json['cantidad'] == 3:
+            return 'si'
+        else:
+            return 'no'
+    else:
+        return 'MAL'
+        
     if response.text == 'OK': 
         print("DATO ENVIADO")
     else:
