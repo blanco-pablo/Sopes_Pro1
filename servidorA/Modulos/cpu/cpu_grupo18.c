@@ -41,8 +41,6 @@ int total;
 int I;
 int segg;
 static int proc_llenar_archivo(struct seq_file *m, void *v) {
-
-    seq_printf(m, "[\n");
 	
 	total = 0;
     I = 0;
@@ -55,9 +53,9 @@ static int proc_llenar_archivo(struct seq_file *m, void *v) {
 		segg = segg + (uptime - (I / h) );
 	}
 
-	seq_printf(m, "%u\n",total);
-	seq_printf(m, "%u\n",segg);
-	seq_printf(m, "%f\n", (100 * ( (total / h ) / segg )));
+	seq_printf(m, "TOTAL: %u\n",total);
+	seq_printf(m, "SEG: %u\n",segg);
+	seq_printf(m, "POR: %d\n", (100 * ( (total / h ) / segg )));
 	return 0;
 }
 
