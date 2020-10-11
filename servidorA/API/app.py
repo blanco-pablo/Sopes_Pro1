@@ -8,10 +8,10 @@ app = Flask(__name__)
 
 @app.route('/ram', methods=['POST'])
 def ram():
-    f = open("/proc/mem_grupo18", "r")
-    data = json.load(f.read())
-    print(data)
-    return data
+    with open('/proc/mem_grupo18') as f:
+        data = json.load(f)
+        print(data)
+    return "algo"
 
 
 @app.route('/')
