@@ -35,50 +35,27 @@ Estado
 struct task_struct *task;
 struct task_struct *task_child;
 struct list_head *list;
-int extra;
-int extra2;
-long suma; 
-double seconds;
-double cpu;
+s64 uptime;
+
 static int proc_llenar_archivo(struct seq_file *m, void *v) {
 
     seq_printf(m, "[\n");
 	
-	suma = 0;
-    extra2 = 0;
-	seconds = 0;
-	cpu = 0;
+	int total = 0;
+    int I= 0;
+	int seg = 0;
+
 	for_each_process(task){
-		if(extra2 == 0){
-			extra2 = 1;
-		}else{
-			seq_printf(m,",");	
-		}
+		uptime = ktime_divns(ktime_get_boottime(), NSEC_PER_SEC);
+		total = total + task->utime + task->stime;
+		I = task->start_time;
+		seg = seg + (uptime -(I / 100));
 
-        seq_printf(m, "\n{ \"uso\" : %llu }", ( 100 * (( (task->utime + task->stime) / 23000000) / (task->start_time / 23000000)) ));
-		extra = 0;
-		list_for_each(list, &task->children){
+	}
 
-			if(extra == 0){
-
-				extra = 1;
-			}else{
-
-				seq_printf(m,",");	
-			}
-			
-			
-
-			task_child = list_entry(list, struct task_struct, sibling);
-			//suma = (task_child->utime + task_child->stime);
-			//seconds = (task_child->start_time / 23000000);
-			//cpu = 100 * ((suma / 23000000) / seconds);
-	    	seq_printf(m, "\n{ \"uso\" : %llu }", ( 100 * (( (task_child->utime + task_child->stime) / 23000000) / (task_child->start_time / 23000000)) ));
-		}			
-		extra = 0;		
-		}
-	seq_printf(m, "\n]\n");
-
+	seq_printf(m, "%u\n",total);
+	seq_printf(m, "%u\n",seg);
+	seq_printf(m, "%u\n",(100 * ((total / 100 ) / seg ));
 	return 0;
 }
 
