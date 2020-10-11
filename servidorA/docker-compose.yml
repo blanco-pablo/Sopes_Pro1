@@ -1,7 +1,7 @@
 version: "3.3"
 services:
     mongo:
-      container_name: mongo
+      container_name: mongo_t
       image: mongo
       command: mongod --smallfiles
       restart: always
