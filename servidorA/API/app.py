@@ -11,7 +11,7 @@ def ram():
     with open('/proc/mem_grupo18') as f:
         for line in f:
             a = line
-        return a["total"]
+        return a[0]
     #with open('/proc/mem_grupo18') as f:
     #    data = json.load(f)
     #    print(data)
