@@ -8,15 +8,15 @@ app = Flask(__name__)
 
 @app.route('/ram', methods=['POST'])
 def ram():
-    with open('/proc/mem_grupo18') as f:
-        data = json.load(f)
-        print(data)
+    #with open('/proc/mem_grupo18') as f:
+    #    data = json.load(f)
+    #    print(data)
     return "algo"
 
 
 @app.route('/')
 def hello_world():
-    return 'api ok'
+    return 'SERVIDOR A ok'
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0',port=int(os.environ.get('PORT', 8080)))
