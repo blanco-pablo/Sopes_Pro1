@@ -17,8 +17,8 @@ mycpu = mydb["ram"]
 
 app = Flask(__name__)
 
-@app.route('/consulta', methods=['POST'])
-def insert():
+@app.route('/consulta', methods=['GET'])
+def consulta():
     listaRAM = []
     listaCPU = []
     #consulto la coleccion de RAM y agrego a un array
@@ -45,7 +45,7 @@ def ram():
         for x in mycol.find():
             listaRAM.append(x['ram'])
         
-        return str(a["total"]) + str(cad)
+        return str(a["total"])
     return ""
 
 
