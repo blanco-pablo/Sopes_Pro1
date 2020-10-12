@@ -39,7 +39,7 @@ def ram():
     with open('/proc/mem_grupo18') as f:
         for line in f:
             a = json.loads(line)
-            mydict = { "ram": a["total"] }
+            mydict = { 'ram': a["total"] }
             x = mycol.insert_one(mydict)
     
     with open('/proc/cpu_grupo18') as f:
@@ -47,10 +47,10 @@ def ram():
             a = json.loads(line)
             cpu_usage = (a['TOTAL'] / 1000) / a['SEG']
             
-            mydict = { "cpu": (cpu_usage/100) }
+            mydict = { 'cpu': (cpu_usage/100) }
             x = mycpu.insert_one(mydict)
 
-    return
+    return ""
 
 
 @app.route('/')
