@@ -13,12 +13,12 @@ data['clients'] = []
 listaNombres = ['Pedro','Raul','Emilio','Pepe','Julio','Marco']
 
 def menu():
-	print ("------------1-Selecciona una opción--------------")
-	print ("\t1 - Ingresar Ruta")
-	print ("\t2 - Ingresar Direccion")
-	print ("\t3 - Ver Datos")
+	print ("-------------Selecciona una opción--------------")
+	print ("\t1 - Ingresar Ruta Archivo")
+	print ("\t2 - Ingresar Direccion Balanceador")
+	print ("\t3 - Ver Datos Cagados ")
 	print ("\t4 - Enviar datos")
-	print ("\t5 - salir")
+	print ("\t5 - Salir")
 	print ("-------------------------------------------------")
 
 while True:

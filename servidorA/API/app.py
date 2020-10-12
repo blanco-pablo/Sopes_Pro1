@@ -14,6 +14,7 @@ myclient = pymongo.MongoClient('mongodb://%s:%s@34.122.6.193:27017/' % (username
 mydb = myclient['mydatabase']
 mycol = mydb["ram"]
 mycpu = mydb["cpu"]
+mydata = mydb["data"]
 
 app = Flask(__name__)
 
@@ -30,8 +31,8 @@ def consulta():
     #mando {'cantidad': 5, 'minRam': 4.5,'minCpu':1.2,status:200}
     return json.dumps({
         'cantidad' : len(listaRAM),
-        'minRam' : min(listaRAM),
-        'minCpu' : min(listaCPU)
+        'minRam' : listaRAM[len(listaRAM)-1],
+        'minCpu' : listaCPU[len(listaCPU)-1]
     })
 
 @app.route('/insert', methods=['POST'])
@@ -49,7 +50,9 @@ def ram():
             
             mydict = { 'cpu': (cpu_usage/100) }
             x = mycpu.insert_one(mydict)
-
+    data = request.form.to_dict()
+    mydata.insert_one(data)
+    
     return json.dumps({'status' : 'ok'})
 
 

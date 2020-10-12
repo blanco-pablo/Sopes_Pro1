@@ -23,18 +23,18 @@ def imp():
         if  cantidadA > cantidadB:
             #Insertar en B
             print("Insert B")
-            requests.post(servidorB+"insert")
+            requests.post(servidorB+"insert", data = json)
         elif cantidadA == cantidadB:
             ramA = response_Json['minRam']
             ramB = response_JsonB['minRam']
             if ramA > ramB:
                 #insert B
                 print("Insertar B")
-                requests.post(servidorB+"insert")
+                requests.post(servidorB+"insert", data = json)
             elif ramA < ramB:
                 #inserta A
                 print("Insertar A")
-                requests.post(servidorA+"insert")
+                requests.post(servidorA+"insert", data = json)
             elif ramA == ramB:                
                 cpuA = response_Json['minCpu']
                 cpuB = response_JsonB['minCpu']
@@ -42,19 +42,19 @@ def imp():
                 if cpuA > cpuB:
                     #insert B
                     print("Insertar B")
-                    requests.post(servidorB+"insert")
+                    requests.post(servidorB+"insert", data = json)
                 elif cpuA < cpuB:
                     #inserta A
                     print("Insertar A")
-                    requests.post(servidorA+"insert")
+                    requests.post(servidorA+"insert", data = json)
                 else:
                     #insert A
                     print("Insertar A")
-                    requests.post(servidorA+"insert")
+                    requests.post(servidorA+"insert", data = json)
         else:
             #insert en A
             print("Insertar A")
-            requests.post(servidorA+"insert")
+            requests.post(servidorA+"insert", data = json)
         return 'OK'
     else:
         print(response.status_code)
