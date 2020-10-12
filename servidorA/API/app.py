@@ -34,18 +34,21 @@ def consulta():
         'minCpu' : min(listaCPU)
     })
 
-@app.route('/ram', methods=['POST'])
+@app.route('/insert', methods=['POST'])
 def ram():
     with open('/proc/mem_grupo18') as f:
         for line in f:
             a = json.loads(line)
-        
-        listaRAM = []
-        for x in mycol.find():
-            listaRAM.append(x['ram'])
-        
-        return str(a["total"])
-    return ""
+            mydict = { "ram": a["total"] }
+            x = mycol.insert_one(mydict)
+    
+    with open('/proc/cpu_grupo18') as f:
+        for line in f:
+            a = json.loads(line)
+            mydict = { "ram": a["total"] }
+            x = mycol.insert_one(mydict)
+
+    return
 
 
 @app.route('/')

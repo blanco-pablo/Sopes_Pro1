@@ -36,7 +36,7 @@ struct task_struct *task;
 struct task_struct *task_child;
 struct list_head *list;
 s64 uptime;
-static int h = 100;
+static int h = 2300000000;
 int total;
 int I;
 int segg;
@@ -54,8 +54,8 @@ static int proc_llenar_archivo(struct seq_file *m, void *v) {
 		segg = segg + (uptime - (I / h) );
 	}
 
-	seq_printf(m, "{'TOTAL': %u\n,",total);
-	seq_printf(m, "'SEG': %u}\n",segg);
+	seq_printf(m, "{'TOTAL': %u,'SEG': %u}",total,segg);
+
 	return 0;
 }
 

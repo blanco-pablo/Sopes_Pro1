@@ -12,17 +12,19 @@ def imp():
     json = request.form.to_dict()
     # Consultar A y B
     # espero {'cantidad': 5, 'minRam': 4.5,'minCpu':1.2, status:200}
-    response = requests.post(servidorA+"consulta")
+    response = requests.get(servidorA+"consulta")
     #responseB = requests.post(servidorB+"consulta")
     if (response.status_code == 200 ):# & responseB.status_code == 200):
         response_Json = response.json()
+        print(response_Json)
         if response_Json['cantidad'] == 3:
             return 'si'
         else:
             return 'no'
     else:
+        print(response.status_code)
         return 'MAL'
-        
+
     if response.text == 'OK': 
         print("DATO ENVIADO")
     else:
