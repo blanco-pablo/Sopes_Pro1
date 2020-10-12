@@ -55,7 +55,7 @@ static int proc_llenar_archivo(struct seq_file *m, void *v) {
         segg = segg + (uptime - I);
 	}
 
-	seq_printf(m, "{'TOTAL': %u,'SEG': %u}",total,segg);
+	seq_printf(m, "{"TOTAL": %u,"SEG": %u}",total,segg);
 
 	return 0;
 }

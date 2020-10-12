@@ -45,7 +45,7 @@ def ram():
     with open('/proc/cpu_grupo18') as f:
         for line in f:
             a = json.loads(line)
-            cpu_usage = (a['TOTAL'] / 1000) / a['SEG']
+            cpu_usage = (a["TOTAL"] / 1000) / a["SEG"]
             
             mydict = { 'cpu': (cpu_usage/100) }
             x = mycpu.insert_one(mydict)
