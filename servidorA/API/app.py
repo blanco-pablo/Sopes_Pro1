@@ -39,7 +39,7 @@ def ram():
     with open('/proc/mem_grupo18') as f:
         for line in f:
             a = json.loads(line)
-            mydict = { 'ram': a["total"]/10 }
+            mydict = { 'ram': (a["total"]/10) }
             x = mycol.insert_one(mydict)
     
     with open('/proc/cpu_grupo18') as f:
