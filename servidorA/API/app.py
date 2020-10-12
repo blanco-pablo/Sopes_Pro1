@@ -50,7 +50,7 @@ def ram():
             mydict = { 'cpu': (cpu_usage/100) }
             x = mycpu.insert_one(mydict)
 
-    return ""
+    return json.dumps({'status' : 'ok'})
 
 
 @app.route('/')
